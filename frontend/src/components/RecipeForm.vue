@@ -4,7 +4,7 @@
     <v-form @submit.prevent="submitForm">
 
     <!-- Champ pour le titre de la recette -->    
-    <v-text-field v-model="form.title" label="Titre"required />
+    <v-text-field v-model="form.title" label="Titre" required />
 
     <!-- Zone de texte pour la description de la recette  -->
     <v-textarea v-model="form.description" label="Description" rows="3" />
@@ -13,7 +13,7 @@
     <v-textarea v-model="form.ingredients" label="Ingrédients (séparés par des virgules)" rows="3" />
 
     <!-- Bouton de soummision (ajouter ou modifier selon le mode) -->
-    <v-btn type="submit" color="primary">{{ isEdit ? 'Modifier' : 'Ajouter' }}</v-btn>
+    <v-btn type="submit" color="primary" class="mr-2">{{ isEdit ? 'Modifier' : 'Ajouter' }}</v-btn>
 
     <!-- Bouton pour réinitialiser le formulaire (annuler l'edition) -->
     <v-btn text @click="resetForm">Annuler</v-btn>
@@ -25,7 +25,7 @@
 <script>
 
 export default {
-    propos: {
+    props: {
         // Donnée reçues depuis le parent (une recette existante à modifier)
         editData: Object,
     },

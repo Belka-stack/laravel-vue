@@ -1,5 +1,18 @@
+// On importe la bibiothèque axios pour faire des requêtes HTTP
 import axios from 'axios';
 
-export default axios.create({
-baseURL: 'http://localhost:8000/api',
+// On crée une instance axios personnalisée
+
+const api = axios.create({
+
+    // L'URLde base pour toute les requêtes API
+    baseURL: 'http://localhost:8000/api',
+
+    // Les en-têtes par défaut pour chaque requête
+    headers: {
+        'Content-type': 'application/json', // Indique qu'on envoie des données JSON
+    },
 });
+
+// On exporte cette instance pour pouvoir l'utiliser ailleurs dans le projet
+export default api;
