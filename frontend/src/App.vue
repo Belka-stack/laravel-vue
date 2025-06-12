@@ -64,8 +64,12 @@ export default {
     // Récupère la liste des recettes depuis le backend
     async fetchRecipes() {
       try {
-        const res = await api.get('/recipes');
-        this.recipes = res.data; // On met à jour laliste locale avec les données reçues
+        const url = this.filter
+        ? `/recipies?ingredient=${encodeURIComponent(this.filter)}`
+        : '/recipies';
+
+        const res = await api.get(url);
+        this.recipes = res.data; // On met à jour la liste locale avec les données reçues
       } catch (err) {
         console.error('Erreur lors du chargement des recettes', err);
       }
@@ -107,6 +111,7 @@ export default {
     // Met à jour le filtre de recherche quand l'utilisateur tape dans la barrede recherche'
     handleSearch(value) {
       this.filter = value;
+      this.fetchRecipes(); // nouvelle requête filtrée
     },
   },
 };

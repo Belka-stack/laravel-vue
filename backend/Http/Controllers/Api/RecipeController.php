@@ -3,16 +3,25 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Recipe;
 use Illuminate\Http\Request;
 
 class RecipeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    // Méthode du contrôleur pour récupérer les recettes
+    public function index(Request $request)
     {
-        //
+        // Récupère la valeur du paramètre 'ingredient' depuis l'URL (ex: /api/recipe?ingredient=poulet)
+        $ingredient = $request->query('ingredient');
+
+        // Si un ingredient est fourni dans la requête,on filtre les recettes conteant cet ingredient
+        if ($ingredient) {
+            // Requête SQL : SELECT $ FROm recipes WHERE ingredients LIKE '%poulet%'
+            return Recipe::where('ingredients', 'LIKE', '%' . $ingredient . '%')->get();
+        }
+        // Sinon, on retourne toutes les recettes sans filtre
+        return Recipe::all();
+
     }
 
     /**
